@@ -12,6 +12,13 @@ const mysql = require('mysql');
 const Updater = require('./lib/database/updater');
 Updater.update();
 
+app.get('/images/*', (req, res) => {
+  const options = {
+    root: path.join(__dirname),
+  };
+  res.sendFile(req.path, options);
+});
+
 app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
 app.use(express.json());
@@ -36,17 +43,6 @@ app.post('/api/:controller/:action', async (req, res) => {
   const result = await new controller(req)[`${req.params.action}Action`]();
   res.json(result);
   req.db.end();
-});
-
-app.get('/images/*', (req, res) => {
-  const options = {
-    root: path.join(__dirname),
-  };
-  res.sendFile(req.path, options);
-});
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
 app.listen(port, () => {
