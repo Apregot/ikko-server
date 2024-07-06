@@ -10,8 +10,6 @@ const modifierStore = useModifierStore();
 
 // order render
 const orderItems = computed(() => {
-  console.error('2', orderStore.orderItems)
-
   return orderStore.orderItems.map((orderItem) => {
     return {
       item: itemStore.itemById(orderItem.itemId),

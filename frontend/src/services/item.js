@@ -10,9 +10,6 @@ export const ItemService = {
 			method: 'POST',
 		});
 		const { categories, items, modifiers } = await response.json();
-		console.error('categories', categories);
-		console.error('items', items);
-		console.error('modifiers', modifiers);
 		
 		const categoryStore = useCategoryStore();
 		const itemStore = useItemStore();

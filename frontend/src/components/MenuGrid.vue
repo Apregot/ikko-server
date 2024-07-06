@@ -7,6 +7,7 @@ import { ModifierType } from '@/const/modificator.js';
 
 import MenuItem from '@/components/MenuItem.vue';
 import ModifierPopup from '@/components/ModifierPopup.vue';
+import CategoryTabs from '@/components/CategoryTabs.vue';
 
 const itemStore = useItemStore();
 const modifierStore = useModifierStore();
@@ -14,11 +15,21 @@ const orderStore = useOrderStore();
 
 // list render
 const items = computed(() => {
-  return Object.values(itemStore.collection);
+  return Object.values(itemStore.collection).filter((item) => {
+    return item.categoryId === activeTabId.value;
+  });
 });
 // end list render
 
-// click handler
+// category click handler
+const activeTabId = ref(1);
+const onCategoryClick = (category) => {
+  console.error('1', category.id)
+  activeTabId.value = category.id;
+};
+// end category click handler
+
+// item click handler
 const selectedItemId = ref(0);
 const selectedMilkId = ref(0);
 
@@ -38,7 +49,7 @@ const onItemClick = (item) => {
   milkModifiers.value = milks;
   cupModifiers.value = cups;
 };
-// end click handler
+// end item click handler
 
 // modifiers selection
 const milkModifiers = ref([]);
@@ -52,7 +63,6 @@ const showCupPopup = computed(() => {
 });
 
 const onMilkSelect = (milk) => {
-  console.error('milk', milk.title, 'added');
   if (cupModifiers.value.length === 0)
   {
     orderStore.addItem({
@@ -70,7 +80,6 @@ const onMilkSelect = (milk) => {
 };
 
 const onCupSelect = (cup) => {
-  console.error('cup', cup.title, 'added');
   const finalModifiers = [];
   if (selectedMilkId.value > 0)
   {
@@ -90,6 +99,7 @@ const onCupSelect = (cup) => {
 
 <template>
   <div class="menu__container">
+    <CategoryTabs @click="onCategoryClick" :activeTabId="activeTabId" />
     <MenuItem v-for="item in items" @click="onItemClick" :item="item" />
   </div>
   <ModifierPopup v-if="showMilkPopup" @click="onMilkSelect" :items="milkModifiers" />

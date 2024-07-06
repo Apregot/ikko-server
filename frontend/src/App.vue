@@ -35,7 +35,7 @@ const createOrder = () => {
       <img alt="Vue logo" class="logo" src="./assets/igor.jpeg" width="125" height="125" />
       <div>Чего желаете?</div>
     </header>
-    <main>
+    <main class="app__content">
       <div class="app__content_left">
         <OrderSummary />
       </div>
@@ -73,8 +73,16 @@ footer {
   overflow: hidden;
 }
 
-.app__content_left,
+.app__content {
+  display: flex;
+}
+
+.app__content_left {
+  flex-grow: 1;
+}
+
 .app__content_right {
-  width: 50%;
+  width: 500px;
+  flex-shrink: 0;
 }
 </style>
