@@ -113,6 +113,5 @@ const onCupSelect = (cup) => {
     flex-wrap: wrap;
     width: 100%;
     height: 100%;
-    background: #eee;
   }
 </style>

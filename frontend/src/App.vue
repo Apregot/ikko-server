@@ -64,13 +64,15 @@ main {
   display: flex;
   width: 100%;
   flex-grow: 1;
+  background: #333858;
 }
 
 footer {
   display: flex;
   justify-content: flex-end;
   flex-shrink: 0;
-  margin-right: 30px;
+  padding-right: 30px;
+  background: #282C50;
 }
 
 .app__container {
@@ -87,10 +89,12 @@ footer {
 
 .app__content_left {
   flex-grow: 1;
+  background: #fff;
 }
 
 .app__content_right {
   width: 600px;
   flex-shrink: 0;
+  background:
 }
 </style>

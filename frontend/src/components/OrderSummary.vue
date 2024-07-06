@@ -40,11 +40,19 @@ const getFormattedModifiersForItem = (item) => {
 
 <template>
   <div class="order__container">
-    <div v-for="orderItem in orderItems">
+    <div v-for="orderItem in orderItems" class="order__item">
       {{ orderItem.item.title }} {{ getFormattedModifiersForItem(orderItem) }}
     </div>
   </div>
 </template>
 
 <style>
+.order__container {
+  padding-top: 50px;
+  padding-left: 15px;
+}
+
+.order__item {
+  margin-bottom: 5px;
+}
 </style>

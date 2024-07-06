@@ -32,7 +32,7 @@ const categories = computed(() => {
   align-content: flex-start;
   flex-wrap: wrap;
   width: 100%;
-  background: #eee;
+  background: transparent;
 }
 
 .categories__item {
@@ -43,19 +43,19 @@ const categories = computed(() => {
   width: 120px;
   height: 60px;
   cursor: pointer;
-  background: #8181e7;
   color: #fff;
+  border: 1px solid #000;
   font-size: 13px;
   text-transform: uppercase;
   font-weight: bold;
 }
 
 .categories__item:hover {
-  background: #5252e3;
+  background: #56568f;
 }
 
 .categories__item.--active {
-  background: #acccac;
+  background: #73744D;
   color: #000;
 }
 </style>

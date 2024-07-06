@@ -16,10 +16,11 @@ import CachMachineIcon from '@/components/icons/CachMachineIcon.vue';
     align-items: center;
     padding: 10px;
     cursor: pointer;
+    color: #fff;
   }
 
   .order-button__container:hover {
-    background: #eee;
+    background: #111;
   }
 
   .order-button__text {

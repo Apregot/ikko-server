@@ -30,11 +30,11 @@ const onClick = () => {
   font-size: 13px;
   font-weight: bold;
   cursor: pointer;
-  background: #ccc;
+  background: #999DBD;
 }
 
 .item__container:hover {
-  background: #ddd;
+  background: #898da9;
 }
 
 .item__container.--disabled {
