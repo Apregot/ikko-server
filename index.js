@@ -7,9 +7,9 @@ app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
 app.use(express.json());
 
-app.post('/api/data/:controller', (req, res) => {
+app.post('/api/:controller/:action', (req, res) => {
   const controller = require(`./lib/Controller/${req.params.controller}`);
-  res.json(new controller(req).exec());
+  res.json(new controller(req)[req.params.action]());
 });
 
 app.get('*', (req, res) => {
