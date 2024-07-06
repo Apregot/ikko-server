@@ -1,12 +1,19 @@
 <script setup>
-import { computed } from 'vue';
+const props = defineProps(['item']);
+const emit = defineEmits(['click']);
 
-defineProps(['item']);
-defineEmits(['click']);
+const onClick = () => {
+  if (!props.item.available)
+  {
+    return;
+  }
+
+  emit('click', props.item);
+};
 </script>
 
 <template>
-  <div @click="$emit('click', item)" class="item__container">
+  <div @click="onClick" class="item__container" :class="{'--disabled': !item.available}">
     {{ item.title }}
   </div>
 </template>
@@ -27,5 +34,9 @@ defineEmits(['click']);
 
 .item__container:hover {
   background: #ddd;
+}
+
+.item__container.--disabled {
+  background: #fdcfcf;
 }
 </style>
