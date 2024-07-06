@@ -1,13 +1,18 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = 3000;
+const port = 80;
 
 app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
 app.use(express.json());
 
 app.post('/api/:controller/:action', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', '*');
+  res.setHeader('Access-Control-Allow-Headers', '*');
+  res.setHeader('Access-Control-Allow-Credentials', '*');
+
   const controller = require(`./lib/Controller/${req.params.controller}`);
   res.json(new controller(req)[`${req.params.action}Action`]());
 });
