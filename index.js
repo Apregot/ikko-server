@@ -7,6 +7,13 @@ app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
 app.use(express.json());
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.json({
+  type(req) {
+    return true;
+  }
+}));
+
 app.post('/api/:controller/:action', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', '*');
