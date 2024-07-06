@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.post('/api/:controller/:action', (req, res) => {
   const controller = require(`./lib/Controller/${req.params.controller}`);
-  res.json(new controller(req)[req.params.action]());
+  res.json(new controller(req)[`${req.params.action}Action`]());
 });
 
 app.get('*', (req, res) => {
