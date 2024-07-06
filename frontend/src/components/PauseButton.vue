@@ -1,17 +1,17 @@
 <script setup>
-import EndDayIcon from '@/components/icons/EndDayIcon.vue';
+import PauseDayIcon from '@/components/icons/PauseDayIcon.vue';
 
 </script>
 
 <template>
-  <div class="end-day-button__container">
-    <EndDayIcon />
-    <div class="end-day-button__text">Пауза</div>
+  <div class="pause-day-button__container">
+    <PauseDayIcon />
+    <div class="pause-day-button__text">Пауза</div>
   </div>
 </template>
 
 <style>
-.end-day-button__container {
+.pause-day-button__container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,11 +20,11 @@ import EndDayIcon from '@/components/icons/EndDayIcon.vue';
   color: #fff;
 }
 
-.end-day-button__container:hover {
+.pause-day-button__container:hover {
   background: #111;
 }
 
-.end-day-button__text {
+.pause-day-button__text {
   margin-top: 5px;
 }
 </style>
