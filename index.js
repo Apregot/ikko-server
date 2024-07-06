@@ -3,6 +3,10 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
+
+const Updater = require('./lib/database/updater');
+Updater.update();
+
 app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
 app.use(express.json());
