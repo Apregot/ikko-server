@@ -38,6 +38,13 @@ app.post('/api/:controller/:action', async (req, res) => {
   req.db.end();
 });
 
+app.get('/images/*', (req, res) => {
+  const options = {
+    root: path.join(__dirname),
+  };
+  res.sendFile(req.path, options);
+});
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
