@@ -11,5 +11,17 @@ export const WorkdayService= {
 		void fetch(`${API_PREFIX}/shift/end`, {
 			method: 'POST',
 		});
-	}
+	},
+	
+	pauseDay() {
+		void fetch(`${API_PREFIX}/shift/pause`, {
+			method: 'POST',
+		});
+	},
+	
+	resumeDay() {
+		void fetch(`${API_PREFIX}/shift/resume`, {
+			method: 'POST',
+		});
+	},
 };

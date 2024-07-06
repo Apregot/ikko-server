@@ -10,6 +10,8 @@ import OrderSummary from '@/components/OrderSummary.vue';
 import CreateOrderButton from '@/components/CreateOrderButton.vue';
 import StartDayButton from '@/components/StartDayButton.vue';
 import EndDayButton from '@/components/EndDayButton.vue';
+import PauseButton from '@/components/PauseButton.vue';
+import ResumeButton from '@/components/ResumeButton.vue';
 
 const orderStore = useOrderStore();
 
@@ -42,6 +44,12 @@ const onStartDay = () => {
 const onEndDay = () => {
   WorkdayService.finishDay();
 };
+const onPauseDay = () => {
+  WorkdayService.pauseDay();
+};
+const onResumeDay = () => {
+  WorkdayService.resumeDay();
+};
 // end workday
 </script>
 
@@ -64,6 +72,8 @@ const onEndDay = () => {
       <div class="app__footer_left">
         <StartDayButton @click="onStartDay" />
         <EndDayButton @click="onEndDay" />
+        <PauseButton @click="onPauseDay" />
+        <ResumeButton @click="onResumeDay" />
       </div>
       <CreateOrderButton @click="createOrder" />
     </footer>
