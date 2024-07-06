@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
 
-export const useCategoryStore = defineStore('category', {
+export const useOrderStore = defineStore('order', {
 	state: () => {
 		return {
-			collection: {}
+			orderItems: [],
 		};
 	},
 	getters: {
@@ -12,9 +12,13 @@ export const useCategoryStore = defineStore('category', {
 		}
 	},
 	actions: {
-		setCategories(categories)
+		addItem(orderItem)
 		{
-			this.collection = { ...categories };
+			this.orderItems.push(orderItem);
+		},
+		clearOrder()
+		{
+			this.orderItems = [];
 		},
 	}
 })

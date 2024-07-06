@@ -1,20 +1,80 @@
 <script setup>
-import { computed } from 'vue';
-import { useItemStore } from '@/stores/item.js';
+import { ref } from 'vue';
+import { ItemService } from '@/services/item.js';
+import { OrderService } from '@/services/order.js';
+import { useOrderStore } from '@/stores/order.js';
 
-const itemStore = useItemStore();
-const items = computed(() => {
-  return Object.values(itemStore.collection);
-});
+import MenuGrid from '@/components/MenuGrid.vue';
+import OrderSummary from '@/components/OrderSummary.vue';
+
+const orderStore = useOrderStore();
+
+// init
+const isLoading = ref(false);
+const fetchItems = async () => {
+  isLoading.value = true;
+  await ItemService.getItems();
+  isLoading.value = false;
+};
+
+fetchItems();
+// end init
+
+// create order
+const createOrder = () => {
+  OrderService.createOrder(orderStore.orderItems);
+  orderStore.clearOrder();
+};
+// end create order
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/igor.jpeg" width="125" height="125" />
-  </header>
-  <div v-for="item in items">{{ item.title }}</div>
+  <div v-if="isLoading">Загружаем меню...</div>
+  <div v-else class="app__container">
+    <header>
+      <img alt="Vue logo" class="logo" src="./assets/igor.jpeg" width="125" height="125" />
+      <div>Чего желаете?</div>
+    </header>
+    <main>
+      <div class="app__content_left">
+        <OrderSummary />
+      </div>
+      <div class="app__content_right">
+        <MenuGrid />
+      </div>
+    </main>
+    <footer>
+      <button @click="createOrder">Касса</button>
+    </footer>
+  </div>
 </template>
 
-<style scoped>
+<style>
+header {
+  margin-bottom: 50px;
+  flex: 0 0 150px;
+}
 
+main {
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+}
+
+footer {
+  flex: 0 0 100px;
+}
+
+.app__container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.app__content_left,
+.app__content_right {
+  width: 50%;
+}
 </style>
