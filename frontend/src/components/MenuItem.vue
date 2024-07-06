@@ -1,4 +1,7 @@
 <script setup>
+import { computed } from 'vue';
+import PositionUnavailableIcon from '@/components/icons/PositionUnavailableIcon.vue';
+
 const props = defineProps(['item']);
 const emit = defineEmits(['click']);
 
@@ -15,11 +18,15 @@ const onClick = () => {
 <template>
   <div @click="onClick" class="item__container" :class="{'--disabled': !item.available}">
     {{ item.title }}
+    <div v-if="!item.available" class="item__unavailable-icon">
+      <PositionUnavailableIcon />
+    </div>
   </div>
 </template>
 
 <style>
 .item__container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,6 +45,18 @@ const onClick = () => {
 }
 
 .item__container.--disabled {
-  background: #fdcfcf;
+  //background: #fdcfcf;
+}
+
+.item__unavailable-icon {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.7;
 }
 </style>

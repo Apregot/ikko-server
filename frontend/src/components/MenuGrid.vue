@@ -24,7 +24,6 @@ const items = computed(() => {
 // category click handler
 const activeTabId = ref(1);
 const onCategoryClick = (category) => {
-  console.error('1', category.id)
   activeTabId.value = category.id;
 };
 // end category click handler

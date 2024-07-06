@@ -1,14 +1,29 @@
 <script setup>
+import PositionUnavailableIcon from '@/components/icons/PositionUnavailableIcon.vue';
+
 defineProps(['items']);
-defineEmits(['click']);
+const emit = defineEmits(['click']);
+
+const onClick = (item) => {
+  if (!item.available)
+  {
+    return;
+  }
+  emit('click', item);
+};
 </script>
 
 <template>
   <div class="popup__container">
     <div class="popup__title">Модификаторы</div>
-    <div v-for="item in items" @click="$emit('click', item)" class="popup__item">
+    <div v-for="item in items" @click="onClick(item)" class="popup__item" :class="{'--disabled': !item.available}">
       <div class="popup__item_plus">+</div>
-      <div class="popup__item_text">{{ item.title }}</div>
+      <div class="popup__item_text">
+        {{ item.title }}
+        <div v-if="!item.available" class="popup__unavailable-icon">
+          <PositionUnavailableIcon />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -48,6 +63,18 @@ defineEmits(['click']);
   background: #eee;
 }
 
+.popup__item.--disabled {
+  background: transparent;
+}
+
+.popup__item.--disabled .popup__item_text {
+  color: #fff;
+}
+
+.popup__item.--disabled .popup__item_plus {
+  color: #fff;
+}
+
 .popup__item_plus {
   display: flex;
   justify-content: center;
@@ -60,8 +87,21 @@ defineEmits(['click']);
 }
 
 .popup__item_text {
+  position: relative;
   flex-grow: 1;
   text-align: center;
   color: #333858;
+}
+
+.popup__unavailable-icon {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.7;
 }
 </style>
