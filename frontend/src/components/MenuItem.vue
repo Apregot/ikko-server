@@ -24,10 +24,11 @@ const onClick = () => {
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 100px;
-  height: 50px;
-  border: 1px solid lightgray;
+  width: 120px;
+  height: 60px;
+  border: 1px solid #000;
   font-size: 13px;
+  font-weight: bold;
   cursor: pointer;
   background: #ccc;
 }

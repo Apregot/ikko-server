@@ -6,6 +6,7 @@ import { useOrderStore } from '@/stores/order.js';
 
 import MenuGrid from '@/components/MenuGrid.vue';
 import OrderSummary from '@/components/OrderSummary.vue';
+import CreateOrderButton from '@/components/CreateOrderButton.vue';
 
 const orderStore = useOrderStore();
 
@@ -22,6 +23,10 @@ fetchItems();
 
 // create order
 const createOrder = () => {
+  if (orderStore.orderItems.length === 0)
+  {
+    return;
+  }
   OrderService.createOrder(orderStore.orderItems);
   orderStore.clearOrder();
 };
@@ -31,10 +36,10 @@ const createOrder = () => {
 <template>
   <div v-if="isLoading">Загружаем меню...</div>
   <div v-else class="app__container">
-    <header>
-      <img alt="Vue logo" class="logo" src="./assets/igor.jpeg" width="125" height="125" />
-      <div>Чего желаете?</div>
-    </header>
+<!--    <header>-->
+<!--      <img alt="Vue logo" class="logo" src="./assets/igor.jpeg" width="125" height="125" />-->
+<!--      <div>Чего желаете?</div>-->
+<!--    </header>-->
     <main class="app__content">
       <div class="app__content_left">
         <OrderSummary />
@@ -44,7 +49,7 @@ const createOrder = () => {
       </div>
     </main>
     <footer>
-      <button @click="createOrder">Касса</button>
+      <CreateOrderButton @click="createOrder" />
     </footer>
   </div>
 </template>
@@ -62,7 +67,10 @@ main {
 }
 
 footer {
-  flex: 0 0 100px;
+  display: flex;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  margin-right: 30px;
 }
 
 .app__container {
@@ -82,7 +90,7 @@ footer {
 }
 
 .app__content_right {
-  width: 500px;
+  width: 600px;
   flex-shrink: 0;
 }
 </style>

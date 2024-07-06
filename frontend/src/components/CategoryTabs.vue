@@ -40,12 +40,14 @@ const categories = computed(() => {
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 100px;
-  height: 50px;
+  width: 120px;
+  height: 60px;
   cursor: pointer;
   background: #8181e7;
   color: #fff;
   font-size: 13px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .categories__item:hover {
