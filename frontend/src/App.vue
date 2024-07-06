@@ -2,11 +2,14 @@
 import { ref } from 'vue';
 import { ItemService } from '@/services/item.js';
 import { OrderService } from '@/services/order.js';
+import { WorkdayService } from '@/services/workday.js';
 import { useOrderStore } from '@/stores/order.js';
 
 import MenuGrid from '@/components/MenuGrid.vue';
 import OrderSummary from '@/components/OrderSummary.vue';
 import CreateOrderButton from '@/components/CreateOrderButton.vue';
+import StartDayButton from '@/components/StartDayButton.vue';
+import EndDayButton from '@/components/EndDayButton.vue';
 
 const orderStore = useOrderStore();
 
@@ -31,6 +34,15 @@ const createOrder = () => {
   orderStore.clearOrder();
 };
 // end create order
+
+// workday
+const onStartDay = () => {
+  WorkdayService.startDay();
+};
+const onEndDay = () => {
+  WorkdayService.finishDay();
+};
+// end workday
 </script>
 
 <template>
@@ -49,6 +61,10 @@ const createOrder = () => {
       </div>
     </main>
     <footer>
+      <div class="app__footer_left">
+        <StartDayButton @click="onStartDay" />
+        <EndDayButton @click="onEndDay" />
+      </div>
       <CreateOrderButton @click="createOrder" />
     </footer>
   </div>
@@ -69,7 +85,7 @@ main {
 
 footer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   flex-shrink: 0;
   padding-right: 30px;
   background: #282C50;
@@ -95,6 +111,10 @@ footer {
 .app__content_right {
   width: 600px;
   flex-shrink: 0;
-  background:
+}
+
+.app__footer_left {
+  display: flex;
+  align-items: center;
 }
 </style>
