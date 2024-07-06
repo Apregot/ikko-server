@@ -5,8 +5,11 @@ const port = 3000;
 
 app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
-app.get('/api/data', (req, res) => {
-    res.json({ message: 'Hello from the backend!' });
+app.use(express.json());
+
+app.post('/api/data/:controller', (req, res) => {
+  const controller = require(`./lib/Controller/${req.params.controller}`);
+  res.json(new controller(req).exec());
 });
 
 app.get('*', (req, res) => {
